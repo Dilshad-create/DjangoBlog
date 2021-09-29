@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render,redirect
 from django.utils import timezone
 from .models import Post,Comment
@@ -13,7 +14,11 @@ def post_list(request):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    return render(request, 'blog/post_detail.html', {'post': post})
+    if( post.published_date!=None ):
+        return render(request, 'blog/post_detail.html', {'post': post})
+    else:
+        return redirect('login')
+
 
 @login_required
 def post_new(request):

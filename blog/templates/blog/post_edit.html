@@ -2,7 +2,11 @@
 
 {% block content %}
 
+    {% if editing %}
+    <h2>Editing an existing post</h2>
+    {% else %}     
     <h2>New post</h2>
+    {% endif %}
     <form method="POST" class="post-form">
         {% csrf_token %}
         {{ form.as_p }}

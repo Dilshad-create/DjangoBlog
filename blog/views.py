@@ -14,7 +14,7 @@ def post_list(request):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    if( post.published_date!=None ):
+    if post.published_date is not None or request.user.is_authenticated:
         return render(request, 'blog/post_detail.html', {'post': post})
     else:
         return redirect('login')
